@@ -11,10 +11,14 @@
           {
              var dragonEmber = document.msform.dragonembers.value;
 
-             var sum = dragonEmber;
-             document.getElementById('elementalhunts').value = sum;
-             document.getElementById('elementalcheese').value = sum;
-             document.getElementById('reinforce').value = sum;
+
+             var elementalCheese = dragonEmber * .65;
+             var reinforce = dragonEmber * .35;
+             var elementalHunts = reinforce + 10;
+              
+             document.getElementById('elementalhunts').value = elementalHunts;
+             document.getElementById('elementalcheese').value = elementalCheese;
+             document.getElementById('reinforce').value = reinforce;
           }
         
         // https://www.linkedin.com/in/atakangk/
@@ -235,12 +239,6 @@
 <body>
 <!-- multistep form -->
 <form id="msform" name="msform">
-  <!-- progressbar -->
-  <ul id="progressbar">
-    <li class="active">Account Setup</li>
-    <li>Social Profiles</li>
-    <li>Personal Details</li>
-  </ul>
   <!-- fieldsets -->
   <fieldset>
     <h2 class="fs-title">Calculate EC Run Based on Embers</h2>
