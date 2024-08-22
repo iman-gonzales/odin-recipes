@@ -14,11 +14,15 @@
 
              var elementalCheese = dragonEmber * .65;
              var reinforce = dragonEmber * .35;
-             var elementalHunts = reinforce + 10;
+             var elementalCheeseUnit = elementalCheese / 150;
+             var reinforceUnit = reinforce / 75;
+             var elementalHunts = reinforceUnit + 10;
               
              document.getElementById('elementalhunts').value = elementalHunts;
              document.getElementById('elementalcheese').value = elementalCheese;
-             document.getElementById('reinforce').value = reinforce;
+             document.getElementById('elementalhunts').value = elementalHunts;
+             document.getElementById('elementalcheeseUnit').value = elementalCheeseUnit;
+             document.getElementById('reinforceUnit').value = reinforceUnit;
           }
         
         // https://www.linkedin.com/in/atakangk/
@@ -246,6 +250,12 @@
       
     <label for="elementalhunts">Elemental Cavern Hunts:</label>
     <input type="text" id="elementalhunts" placeholder="No. Of Hunts" disabled/>
+
+    <label for="elementalcheeseUnit">Can Craft Elemental Cheese:</label>
+    <input type="text" id="elementalcheese" placeholder="No. Of Cheese" disabled/>
+      
+    <label for="reinforceUnit">Can Reinforce Adiitional Hunts:</label>
+    <input type="text" id="reinforce" placeholder="No. Of Reinforce" disabled/>
       
     <label for="elementalcheese">Used for Elemental Cheese:</label>
     <input type="text" id="elementalcheese" placeholder="No. Of Embers Used for Cheese" disabled/>
