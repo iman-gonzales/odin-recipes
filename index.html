@@ -1,122 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Draconic Depths Calculator</title>
     <script>
+      function calculateEmberRun()
+        {
+            var dragonEmber = document.msform.dragonembers.value;
+            var checkBox = document.getElementById("CC")
+            if (checkBox.checked == true){
+              var dragonEmber = dragonEmber - 750; //deducting 750 for the min. 10 cheese (5 * 150)
+              var elementalCheese = dragonEmber * .50;
+              var reinforce = dragonEmber * .50;
+              var elementalCheeseUnit = (elementalCheese / 150) + 5;
+              var elementalCheeseUnit2 = ((elementalCheese / 150)*2) + 10;
+              var reinforceUnit = reinforce / 75;
+              var elementalCheese = elementalCheese + 750;
+              var elementalHunts = reinforceUnit + 10;
+              var cheese = elementalHunts * 50;
+              var grubs = cheese * 5;
+            }else{
+              var dragonEmber = dragonEmber - 1500; //deducting 1500 for the min. 10 cheese (10 * 150)
+              var elementalCheese = dragonEmber * .65;
+              var reinforce = dragonEmber * .35;
+              var elementalCheeseUnit = (elementalCheese / 150) + 10;
+              var elementalCheeseUnit2 = (elementalCheese / 150) + 10;
+              var reinforceUnit = reinforce / 75;
+              var elementalCheese = elementalCheese + 1500;
+              var elementalHunts = reinforceUnit + 10;
+              var cheese = elementalHunts * 50;
+              var grubs = cheese * 10;
+            }
+            
+            document.getElementById('elementalhunts').value = elementalHunts.toFixed(2);
+            
+            //Distribution
+            document.getElementById('elementalcheese').value = elementalCheese;
+            document.getElementById('reinforce').value = reinforce;
 
-        function calculateEmberRun()
-          {
-             var dragonEmber = document.msform.dragonembers.value;
-             var checkBox = document.getElementById("CC")
-             if (checkBox.checked == true){
-                var dragonEmber = dragonEmber - 750; //deducting 750 for the min. 10 cheese (5 * 150)
-                var elementalCheese = dragonEmber * .50;
-                var reinforce = dragonEmber * .50;
-                var elementalCheeseUnit = (elementalCheese / 150) + 5;
-                var elementalCheeseUnit2 = ((elementalCheese / 150)*2) + 10;
-                var reinforceUnit = reinforce / 75;
-                var elementalCheese = elementalCheese + 750;
-             }else{
-                var dragonEmber = dragonEmber - 1500; //deducting 1500 for the min. 10 cheese (10 * 150)
-                var elementalCheese = dragonEmber * .65;
-                var reinforce = dragonEmber * .35;
-                var elementalCheeseUnit = (elementalCheese / 150) + 10;
-                var elementalCheeseUnit2 = (elementalCheese / 150) + 10;
-                var reinforceUnit = reinforce / 75;
-                var elementalCheese = elementalCheese + 1500;
-             }
+            //Units
+            document.getElementById('elementalcheeseUnit').value = elementalCheeseUnit.toFixed(2);
+            document.getElementById('elementalcheeseUnit2').value = elementalCheeseUnit2.toFixed(2);
+            document.getElementById('reinforceUnit').value = reinforceUnit.toFixed(2);
 
-             var elementalHunts = reinforceUnit + 10;
-              
-             document.getElementById('elementalhunts').value = elementalHunts;
-             document.getElementById('elementalcheese').value = elementalCheese;
-             document.getElementById('reinforce').value = reinforce;
-             document.getElementById('elementalcheeseUnit').value = elementalCheeseUnit;
-             document.getElementById('elementalcheeseUnit2').value = elementalCheeseUnit2;
-             document.getElementById('reinforceUnit').value = reinforceUnit;
-          }
-        
-        // https://www.linkedin.com/in/atakangk/
-        //jQuery time
-        var current_fs, next_fs, previous_fs; //fieldsets
-        var left, opacity, scale; //fieldset properties which we will animate
-        var animating; //flag to prevent quick multi-click glitches
-        
-        $(".next").click(function(){
-        	if(animating) return false;
-        	animating = true;
-        	
-        	current_fs = $(this).parent();
-        	next_fs = $(this).parent().next();
-        	
-        	//activate next step on progressbar using the index of next_fs
-        	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-        	
-        	//show the next fieldset
-        	next_fs.show(); 
-        	//hide the current fieldset with style
-        	current_fs.animate({opacity: 0}, {
-        		step: function(now, mx) {
-        			//as the opacity of current_fs reduces to 0 - stored in "now"
-        			//1. scale current_fs down to 80%
-        			scale = 1 - (1 - now) * 0.2;
-        			//2. bring next_fs from the right(50%)
-        			left = (now * 50)+"%";
-        			//3. increase opacity of next_fs to 1 as it moves in
-        			opacity = 1 - now;
-        			current_fs.css({
-                'transform': 'scale('+scale+')',
-                'position': 'absolute'
-              });
-        			next_fs.css({'left': left, 'opacity': opacity});
-        		}, 
-        		duration: 800, 
-        		complete: function(){
-        			current_fs.hide();
-        			animating = false;
-        		}, 
-        		//this comes from the custom easing plugin
-        		easing: 'easeInOutBack'
-        	});
-        });
-        
-        $(".previous").click(function(){
-        	if(animating) return false;
-        	animating = true;
-        	
-        	current_fs = $(this).parent();
-        	previous_fs = $(this).parent().prev();
-        	
-        	//de-activate current step on progressbar
-        	$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-        	
-        	//show the previous fieldset
-        	previous_fs.show(); 
-        	//hide the current fieldset with style
-        	current_fs.animate({opacity: 0}, {
-        		step: function(now, mx) {
-        			//as the opacity of current_fs reduces to 0 - stored in "now"
-        			//1. scale previous_fs from 80% to 100%
-        			scale = 0.8 + (1 - now) * 0.2;
-        			//2. take current_fs to the right(50%) - from 0%
-        			left = ((1-now) * 50)+"%";
-        			//3. increase opacity of previous_fs to 1 as it moves in
-        			opacity = 1 - now;
-        			current_fs.css({'left': left});
-        			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
-        		}, 
-        		duration: 800, 
-        		complete: function(){
-        			current_fs.hide();
-        			animating = false;
-        		}, 
-        		//this comes from the custom easing plugin
-        		easing: 'easeInOutBack'
-        	});
-        });
+            //Grubs
+            document.getElementById('grubs').value = grubs.toFixed(2);
+            document.getElementById('cheese').value = cheese.toFixed(2);
+        }
     </script>
     <style>
     /*custom font*/
@@ -155,12 +86,9 @@
     	margin: 0 10%;
     	
     	/*stacking fieldsets above each other*/
-    	position: relative;
+    	/*position: relative;*/
     }
-    /*Hide all except first fieldset*/
-    #msform fieldset:not(:first-of-type) {
-    	display: none;
-    }
+  
     /*inputs*/
     #msform input, #msform textarea {
     	padding: 15px;
@@ -172,6 +100,116 @@
     	font-family: montserrat;
     	color: #2C3E50;
     	font-size: 13px;
+    }
+
+    #msform label {
+    	font-family: montserrat;
+    	color: #2C3E50;
+    	font-size: 12px;
+      font-weight: bold;
+    }
+
+    /*checkbox*/
+    .checkbox-wrapper-4 * {
+    box-sizing: border-box;
+    }
+    .checkbox-wrapper-4 .cbx {
+      -webkit-user-select: none;
+      user-select: none;
+      cursor: pointer;
+      padding: 6px 8px;
+      border-radius: 6px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+    .checkbox-wrapper-4 .cbx:not(:last-child) {
+      margin-right: 6px;
+    }
+    .checkbox-wrapper-4 .cbx:hover {
+      background: rgba(26, 192, 4, 0.06);
+    }
+    .checkbox-wrapper-4 .cbx span {
+      float: left;
+      vertical-align: middle;
+      transform: translate3d(0, 0, 0);
+    }
+    .checkbox-wrapper-4 .cbx span:first-child {
+      position: relative;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      transform: scale(1);
+      border: 1px solid #cccfdb;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 1px rgba(0,16,75,0.05);
+    }
+    .checkbox-wrapper-4 .cbx span:first-child svg {
+      position: absolute;
+      top: 3px;
+      left: 2px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 16px;
+      stroke-dashoffset: 16px;
+      transition: all 0.3s ease;
+      transition-delay: 0.1s;
+      transform: translate3d(0, 0, 0);
+    }
+    .checkbox-wrapper-4 .cbx span:last-child {
+      padding-left: 8px;
+      line-height: 18px;
+    }
+    .checkbox-wrapper-4 .cbx:hover span:first-child {
+      border-color: rgb(24, 204, 0);
+    }
+    .checkbox-wrapper-4 .inp-cbx {
+      position: absolute;
+      visibility: hidden;
+    }
+    .checkbox-wrapper-4 .inp-cbx:checked + .cbx span:first-child {
+      background: rgb(24, 204, 0);
+      border-color: rgb(24, 204, 0);
+      animation: wave-4 0.4s ease;
+    }
+    .checkbox-wrapper-4 .inp-cbx:checked + .cbx span:first-child svg {
+      stroke-dashoffset: 0;
+    }
+    .checkbox-wrapper-4 .inline-svg {
+      position: absolute;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+    @media screen and (max-width: 640px) {
+      .checkbox-wrapper-4 .cbx {
+        width: 100%;
+        display: inline-block;
+      }
+    }
+    @-moz-keyframes wave-4 {
+      50% {
+        transform: scale(0.9);
+      }
+    }
+    @-webkit-keyframes wave-4 {
+      50% {
+        transform: scale(0.9);
+      }
+    }
+    @-o-keyframes wave-4 {
+      50% {
+        transform: scale(0.9);
+      }
+    }
+    @keyframes wave-4 {
+      50% {
+        transform: scale(0.9);
+      }
     }
     /*buttons*/
     #msform .action-button {
@@ -192,10 +230,11 @@
     }
     /*headings*/
     .fs-title {
-    	font-size: 15px;
+    	font-size: 12px;
     	text-transform: uppercase;
     	color: #2C3E50;
     	margin-bottom: 10px;
+      margin-top: 10px;
     }
     .fs-subtitle {
     	font-weight: normal;
@@ -203,59 +242,28 @@
     	color: #666;
     	margin-bottom: 20px;
     }
-    /*progressbar*/
-    #progressbar {
-    	margin-bottom: 30px;
-    	overflow: hidden;
-    	/*CSS counters to number the steps*/
-    	counter-reset: step;
+
+    .headCCEC {
+      -webkit-column-count:2;
+      -moz-column-count:2;
+      column-count:2;
+      -webkit-column-gap:.5em;
+      -moz-column-gap:.5em;
+      column-gap:.5em;
+      padding-bottom:2px;
+      font-size:13px;
+      line-height:15px;
+      -webkit-perspective:1;
     }
-    #progressbar li {
-    	list-style-type: none;
-    	color: white;
-    	text-transform: uppercase;
-    	font-size: 9px;
-    	width: 33.33%;
-    	float: left;
-    	position: relative;
+
+    .headCCEC1 {
+      position:center;
     }
-    #progressbar li:before {
-    	content: counter(step);
-    	counter-increment: step;
-    	width: 20px;
-    	line-height: 20px;
-    	display: block;
-    	font-size: 10px;
-    	color: #333;
-    	background: white;
-    	border-radius: 3px;
-    	margin: 0 auto 5px auto;
+
+    .headCCEC2 {
+      position:center;
     }
-    /*progressbar connectors*/
-    #progressbar li:after {
-    	content: '';
-    	width: 100%;
-    	height: 2px;
-    	background: white;
-    	position: absolute;
-    	left: -50%;
-    	top: 9px;
-    	z-index: -1; /*put it behind the numbers*/
-    }
-    #progressbar li:first-child:after {
-    	/*connector not needed before the first step*/
-    	content: none; 
-    }
-    /*marking active/completed steps green*/
-    /*The number of the step and the connector before it = green*/
-    #progressbar li.active:before,  #progressbar li.active:after{
-    	background: #27AE60;
-    	color: white;
-    }
-    #headCCEC{
-        display:flex;
-        flex-direction: column;
-    }
+
     </style>
 </head>
 <body>
@@ -263,50 +271,70 @@
 <form id="msform" name="msform">
   <!-- fieldsets -->
   <fieldset>
-    <h2 class="fs-title">Calculate EC Run Based on Embers</h2>
-    <div id="wrapper">
-        <div id="head">
-            <input type="text" name="dragonembers" placeholder="Enter Embers" />    
-        </div>
-
-        <div id="headCC">
-            <label for="CC">Use Magic Essence?</label>
-            <input type="checkbox" id="CC" name="CC" value="CC">
-        </div>
-
-        <div id="headECH">
-            <label for="elementalhunts">Elemental Cavern Hunts:</label>
-            <input type="text" id="elementalhunts" placeholder="No. Of Hunts" disabled/>
-        </div>
-
-        <div id="headCCEC" class="columns">
-            <div id="headCCEC1">
-                <label for="elementalcheeseUnit">Quantity of ElementalCheese To Be Bought:</label>
-                <input type="text" id="elementalcheeseUnit" placeholder="No. Of Units to Buy" disabled/>
-            </div>
-            <div id="headCCEC2">
-                <label for="elementalcheeseUnit2">Total ElementalCheese Bought:</label>
-                <input type="text" id="elementalcheeseUnit2" placeholder="No. Of Cheese Bought" disabled/>
-            </div>
-        </div>
-          
-        <div id="headCRAH">
-            <label for="reinforceUnit">Can Reinforce Additional Hunts (on top of the initial 10):</label>
-            <input type="text" id="reinforceUnit" placeholder="No. Of Reinforce" disabled/>
-        </div>
-          
-        <div id="headUEC">
-            <label for="elementalcheese">Embers Used for Elemental Cheese:</label>
-            <input type="text" id="elementalcheese" placeholder="No. Of Embers Used for Cheese" disabled/>
-        </div>
-
-        <div id="headUR">
-            <label for="reinforce">Embers Used for Reinforcing:</label>
-            <input type="text" id="reinforce" placeholder="No. Of Embers Used for Reinforcing" disabled/>
-        </div>
-
-        <INPUT TYPE="button" NAME="button" Value="CALCULATE" onClick="calculateEmberRun()">
+    <h2 class="fs-title">Calculate EDD Run Based on Embers</h2>
+    <div id="head">
+        <input type="text" name="dragonembers" placeholder="Enter Embers" />    
     </div>
+    <div class="checkbox-wrapper-4">
+      <input class="inp-cbx" id="CC" type="checkbox"/>
+      <label class="cbx" for="CC"><span>
+      <svg width="12px" height="10px">
+        <use xlink:href="#check-4"></use>
+      </svg></span><span>Magic Essence?</span></label>
+      <svg class="inline-svg">
+        <symbol id="check-4" viewbox="0 0 12 10">
+          <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+        </symbol>
+      </svg>
+    </div>
+    <div id="headECH">
+        <label for="elementalhunts">Elemental Dragon's Den Hunts:</label>
+        <input type="text" id="elementalhunts" placeholder="No Of EDD Hunts" disabled/>
+    </div>
+    <h2 class="fs-title">Crafting Elemental Emmental Cheese Quantity</h2>
+    <div class="headCCEC">
+        <div class="headCCEC1">
+            <label for="elementalcheeseUnit">Quantity to be Entered:</label>
+            <input type="text" id="elementalcheeseUnit" placeholder="Entered Quantity" disabled/>
+        </div>
+        <div class="headCCEC2">
+            <label for="elementalcheeseUnit2">Actual Quantity Crafted:</label>
+            <input type="text" id="elementalcheeseUnit2" placeholder="Actual Quantity" disabled/>
+        </div>
+    </div>  
+    <h2 class="fs-title">Reinforce</h2>
+    <div id="headCRAH">
+        <label for="reinforceUnit">Can Reinforce Additional Hunts (on top of the initial 10):</label>
+        <input type="text" id="reinforceUnit" placeholder="No. Of Reinforcement Added" disabled/>
+    </div>
+
+    <h2 class="fs-title">Needed Grubs/Cheese</h2>
+    <div class="headCCEC">
+      <div id="headGrub">
+          <label for="grubs">Estimated Grubs for each R/G/B:</label>
+          <input type="text" id="grubs" placeholder="Grubs" disabled/>
+      </div>
+      <div id="headCheese">
+        <label for="cheese">Estimated Cheese for each R/G/B:</label>
+        <input type="text" id="cheese" placeholder="Cheese" disabled/>
+      </div>
+    </div>
+ 
+    <h2 class="fs-title">Dragon Ember Distribution</h2>
+    <div class="headCCEC">
+      <div id="headUEC">
+        <label for="elementalcheese">Used for EEC:</label>
+        <input type="text" id="elementalcheese" placeholder="Used for EEC" disabled/>
+      </div>
+
+      <div id="headUR">
+        <label for="reinforce">Used to Reinforce:</label>
+        <input type="text" id="reinforce" placeholder="Used to Reinforce" disabled/>
+      </div>
+    </div>
+
+
+    <INPUT TYPE="button" NAME="button" Value="CALCULATE" onClick="calculateEmberRun()">
   </fieldset>
 </form>
 </body>
