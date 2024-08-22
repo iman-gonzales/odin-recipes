@@ -10,12 +10,23 @@
         function calculateEmberRun()
           {
              var dragonEmber = document.msform.dragonembers.value;
+             var checkBox = document.getElementById("CC")
+             if (checkBox.checked == true){
+                var dragonEmber = dragonEmber - 750; //deducting 750 for the min. 10 cheese (5 * 150)
+                var elementalCheese = dragonEmber * .50;
+                var reinforce = dragonEmber * .50;
+                var elementalCheeseUnit = (elementalCheese / 75) + 10;
+                var reinforceUnit = reinforce / 75;
+             }else{
+                var dragonEmber = dragonEmber - 1500; //deducting 1500 for the min. 10 cheese (10 * 150)
+                var elementalCheese = dragonEmber * .65;
+                var reinforce = dragonEmber * .35;
+                var elementalCheeseUnit = (elementalCheese / 150) + 10;
+                var reinforceUnit = reinforce / 75;
+             }
 
 
-             var elementalCheese = dragonEmber * .65;
-             var reinforce = dragonEmber * .35;
-             var elementalCheeseUnit = elementalCheese / 150;
-             var reinforceUnit = reinforce / 75;
+
              var elementalHunts = reinforceUnit + 10;
               
              document.getElementById('elementalhunts').value = elementalHunts;
@@ -247,6 +258,8 @@
   <fieldset>
     <h2 class="fs-title">Calculate EC Run Based on Embers</h2>
     <input type="text" name="dragonembers" placeholder="Enter Embers" />
+    <input type="checkbox" id="CC" name="CC" value="CC">
+    <label for="CC">Magic Essence?</label>
       
     <label for="elementalhunts">Elemental Cavern Hunts:</label>
     <input type="text" id="elementalhunts" placeholder="No. Of Hunts" disabled/>
