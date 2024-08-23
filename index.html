@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Draconic Depths Calculator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script>
       function calculateEmberRun()
         {
@@ -18,7 +21,7 @@
               var reinforceUnit = reinforce / 75;
               var elementalCheese = elementalCheese + 750;
               var elementalHunts = reinforceUnit + 10;
-              var cheese = elementalHunts * 50;
+              var cheese = (elementalHunts / 2) * 50;
               var grubs = cheese * 5;
             }else{
               var dragonEmber = dragonEmber - 1500; //deducting 1500 for the min. 10 cheese (10 * 150)
@@ -48,14 +51,88 @@
             document.getElementById('grubs').value = grubs.toFixed(2);
             document.getElementById('cheese').value = cheese.toFixed(2);
         }
+
+        function calculateHuntsRun()
+        {
+            var huntsInput = document.msform.huntsInput.value;
+            var checkBox = document.getElementById("huntsCC")
+            if (checkBox.checked == true){
+              var reinforceEmbers = (huntsInput - 10) * 75;
+              var cheeseEmbers = (huntsInput / 2) * 150;
+              var huntEmbers = reinforceEmbers + cheeseEmbers;
+
+              var cheeseQuantity = ((huntsInput / 2 ) * 50);
+              var meQuantity = (huntsInput / 2);
+
+              var huntGrub = (((huntsInput / 2 ) * 50) / 2) * 10;
+              var meGrub = ((((huntsInput / 2 ) * 50) / 2));
+              var totalMe = ((meGrub * 3) + meQuantity);
+            }else{
+              var reinforceEmbers = (huntsInput - 10) * 75;
+              var cheeseEmbers = (huntsInput ) * 150;
+              var huntEmbers = reinforceEmbers + cheeseEmbers;
+
+              var cheeseQuantity = (huntsInput ) * 50;
+              var meQuantity = 0;
+
+              var huntGrub = ((huntsInput ) * 50) * 10;
+              var meGrub = 0;
+            
+
+            }
+            //Totals
+            document.getElementById('embers').value = huntEmbers.toFixed(2);
+            document.getElementById('me').value = totalMe;
+            document.getElementById('rgrub').value = huntGrub.toFixed(2);
+            document.getElementById('bgrub').value = huntGrub.toFixed(2);
+            document.getElementById('ggrub').value = huntGrub.toFixed(2);
+            //Embers
+            document.getElementById('huntEmbers').value = huntEmbers;
+            document.getElementById('eecEmbers').value = cheeseEmbers;
+            document.getElementById('reinEmbers').value = reinforceEmbers;
+
+            //Units
+            document.getElementById('cheeseQuantity').value = cheeseQuantity;
+            document.getElementById('meQuantity').value = meQuantity;
+
+            //Grubs
+            document.getElementById('huntGrub').value = huntGrub.toFixed(2);
+            document.getElementById('meGrub').value = meGrub.toFixed(2);
+
+        }
+
+      function hideNotEmber()
+      {
+        var emberFS = document.getElementById("emberFS");
+        var huntFS = document.getElementById("huntFS");
+        
+        emberFS.classList.remove('hide');
+        huntFS.classList.add('hide');
+      }
+
+      function hideNotHunt()
+      {
+        var emberFS = document.getElementById("emberFS");
+        var huntFS = document.getElementById("huntFS");
+        
+        huntFS.classList.remove('hide');
+        huntFS.classList.remove('initial-hide');
+        emberFS.classList.add('hide');
+      }
+    /*tabbing*/
     </script>
     <style>
     /*custom font*/
     @import url(https://fonts.googleapis.com/css?family=Montserrat);
-    
+    @import url(https://fonts.googleapis.com/css?family=Geneva);
+    @import url(https://fonts.googleapis.com/css?family=FontAwesome);
     /*basic reset*/
     * {margin: 0; padding: 0;}
-    
+
+    .hide {
+    display:none;
+    }
+
     html {
     	height: 100%;
     	/*Image only BG fallback*/
@@ -66,12 +143,13 @@
     }
     
     body {
-    	font-family: montserrat, arial, verdana;
+    	font-family: montserrat, arial, verdana, Geneva, Tahoma, sans-serif, FontAwesome;
     }
     /*form styles*/
     #msform {
     	width: 400px;
     	margin: 50px auto;
+    	margin-top: 10px;
     	text-align: center;
     	position: relative;
     }
@@ -86,12 +164,16 @@
     	margin: 0 10%;
     	
     	/*stacking fieldsets above each other*/
-    	/*position: relative;*/
+    	position: relative;
     }
-  
+  /*Hide all except first fieldset*/
+    #huntFS.initial-hide{
+      display: none;
+    }
+
     /*inputs*/
     #msform input, #msform textarea {
-    	padding: 15px;
+    	padding: 5px;
     	border: 1px solid #ccc;
     	border-radius: 3px;
     	margin-bottom: 10px;
@@ -99,7 +181,7 @@
     	box-sizing: border-box;
     	font-family: montserrat;
     	color: #2C3E50;
-    	font-size: 13px;
+    	font-size: 11px;
     }
 
     #msform label {
@@ -253,7 +335,18 @@
       padding-bottom:2px;
       font-size:13px;
       line-height:15px;
-      -webkit-perspective:1;
+    }
+
+    .huntCRAH {
+      -webkit-column-count:5;
+      -moz-column-count:5;
+      column-count:5;
+      -webkit-column-gap:.5em;
+      -moz-column-gap:.5em;
+      column-gap:.5em;
+      padding-bottom:2px;
+      font-size:10px;
+      line-height:10px;
     }
 
     .headCCEC1 {
@@ -264,13 +357,117 @@
       position:center;
     }
 
+    /*tabbing*/
+
+nav {
+  width: 400px;
+  margin: 50px auto;
+  margin-bottom: 5px;
+  position: relative;
+  display: block;
+  background-color: white;
+  padding: 15px;
+  border-radius: 20px;
+  transform: scale(.75);
+  overflow: hidden;
+}
+
+nav a {
+  position: relative;
+  text-decoration: none;
+  color: #53588b;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 10px;
+  line-height: 1;
+  text-align: center;
+  display: inline-block;
+  width: 100px;
+  padding: 10px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+nav a b {
+  position: relative;
+  top: 40px;
+  transition: 0.3s ease top;
+}
+
+nav a i {
+  position: relative;
+  left: 25%;
+  transition: 0.3s ease left;
+}
+
+nav span {
+  position: absolute;
+  width: 100px;
+  background-color: #e5eeff;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  border-radius: 50px;
+  z-index: 1;
+  transition: 0.3s ease left;
+}
+
+nav a:hover b {
+  top: 0;
+}
+
+nav a:hover i {
+  left: 0;
+}
+
+nav a:nth-child(1):hover ~ span {
+  left: 10px;
+}
+
+nav a:nth-child(2):hover ~ span {
+  left: 114px;
+}
+
+nav a:nth-child(3):hover ~ span {
+  left: 218px;
+}
+
+#ytd-url {
+  display: block;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  padding: 10px 14px;
+  margin: 20px;
+  color: #fff;
+  font-family: Arial;
+  font-size: 14px;
+  text-decoration: none;
+  background-color: #53588b;
+  border-radius: 4px;
+  box-shadow: 0 10px 20px -5px rgba(83, 88, 139, 0.3);
+  z-index: 125;
+}
+
     </style>
 </head>
 <body>
+  <nav>
+    <a href="#" onclick="hideNotEmber()">
+      <i class="bx bxs-hot"></i>
+      <b>Embers</b>
+    </a>
+    <a href="#" onclick="hideNotHunt()">
+      <i class="bx bxs-megaphone"></i>
+      <b>Hunts</b>
+    </a>
+    <span></span>
+  </nav>
+  
+  <!-- <a href="https://www.youtube.com/channel/UC7hSS_eujjZOEQrjsda76gA/videos" target="_blank" id="ytd-url">My YouTube Channel</a> -->
 <!-- multistep form -->
 <form id="msform" name="msform">
   <!-- fieldsets -->
-  <fieldset>
+  <fieldset id="emberFS">
     <h2 class="fs-title">Calculate EDD Run Based on Embers</h2>
     <div id="head">
         <input type="text" name="dragonembers" placeholder="Enter Embers" />    
@@ -332,10 +529,81 @@
         <input type="text" id="reinforce" placeholder="Used to Reinforce" disabled/>
       </div>
     </div>
-
-
     <INPUT TYPE="button" NAME="button" Value="CALCULATE" onClick="calculateEmberRun()">
   </fieldset>
+  <fieldset id="huntFS" class="initial-hide">
+    <h2 class="fs-title">Calculate Resources Based Off Hunts</h2>
+    <div id="head">
+        <input type="text" name="huntsInput" placeholder="Enter Hunts" />    
+    </div>
+    <div class="checkbox-wrapper-4">
+      <input class="inp-cbx" id="huntsCC" type="checkbox"/>
+      <label class="cbx" for="huntsCC"><span>
+      <svg width="12px" height="10px">
+        <use xlink:href="#check-4"></use>
+      </svg></span><span>Magic Essence?</span></label>
+      <svg class="inline-svg">
+        <symbol id="check-4" viewbox="0 0 12 10">
+          <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+        </symbol>
+      </svg>
+    </div>
+    <h2 class="fs-title">Dragon Ember Distribution</h2>
+    <div class="headCCEC">
+      <div id="headUEC">
+        <label for="eecEmbers">Use for EEC:</label>
+        <input type="text" id="eecEmbers" placeholder="Used for EEC" disabled/>
+      </div>
+
+      <div id="headUR">
+        <label for="reinEmbers">Use to Reinforce:</label>
+        <input type="text" id="reinEmbers" placeholder="Used to Reinforce" disabled/>
+      </div>
+    </div>
+    <div id="headECH">
+        <label for="huntEmbers">Total Dragon Embers Needed:</label>
+        <input type="text" id="huntEmbers" placeholder="No of Dragon Embers" disabled/>
+    </div>
+    <h2 class="fs-title">Needed Grubs / ME for RGB Cheese</h2>
+    <div class="headCCEC">
+      <div id="headGrub">
+          <label for="huntGrub">Needed Grubs for each R/G/B:</label>
+          <input type="text" id="huntGrub" placeholder="Grubs" disabled/>
+      </div>
+      <div class="headCCEC2">
+        <label for="meGrub">ME Needed for each R/G/B:</label>
+        <input type="text" id="meGrub" placeholder="ME Needed" disabled/>
+      </div>
+    </div>
+    <h2 class="fs-title">YIELDS TO</h2>
+    <h2 class="fs-title">RGB Cheese / Magic Essence Needed</h2>
+    <div class="headCCEC">
+        <div class="headCCEC1">
+            <label for="cheeseQuantity">R/G/B Cheese:</label>
+            <input type="text" id="cheeseQuantity" placeholder="R/G/B Cheese Needed" disabled/>
+        </div>
+        <div class="headCCEC2">
+            <label for="meQuantity">ME Needed:</label>
+            <input type="text" id="meQuantity" placeholder="ME Needed" disabled/>
+        </div>
+    </div> 
+
+    <h2 class="fs-title">TOTALS</h2>
+    <div class="huntCRAH">
+      <img src="https://www.mousehuntgame.com/images/items/crafting_items/large/b153b90267ed411dee9a3a406e30170f.png?cv=3" width="50" height="50">
+      <input type="text" id="embers" placeholder="" disabled/>
+      <img src="https://www.mousehuntgame.com/images/items/crafting_items/large/1a5559b59d141e76dec3fe4b8780e5e3.png?cv=3" width="50" height="50">
+      <input type="text" id="me" placeholder="" disabled/>
+      <img src="https://www.mousehuntgame.com/images/items/stats/large/a0afe10ae1f9c2cffa86130f487380f1.png?cv=3" width="50" height="50">
+      <input type="text" id="rgrub" placeholder="" disabled/>
+      <img src="https://www.mousehuntgame.com/images/items/stats/large/685080e54c08505c33337acb0b63885a.png?cv=3" width="50" height="50">
+      <input type="text" id="bgrub" placeholder="" disabled/>
+      <img src="https://www.mousehuntgame.com/images/items/stats/large/b398645c903cd0d4981e4a635a90e0a1.png?cv=3" width="50" height="50">
+      <input type="text" id="ggrub" placeholder="" disabled/>
+    </div>
+    <INPUT TYPE="button" NAME="button" Value="CALCULATE" onClick="calculateHuntsRun()">
+  </fieldset>
+
 </form>
 </body>
 </html>
