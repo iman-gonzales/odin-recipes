@@ -36,6 +36,22 @@
               var grubs = cheese * 10;
             }
             
+            document.getElementById('elementalhunts').value = Math.floor(elementalHunts.toFixed(2));
+            
+            //Distribution
+            document.getElementById('elementalcheese').value = Math.floor(elementalCheese);
+            document.getElementById('reinforce').value = Math.floor(reinforce);
+
+            //Units
+            document.getElementById('elementalcheeseUnit').value = Math.floor(elementalCheeseUnit.toFixed(2));
+            document.getElementById('elementalcheeseUnit2').value = Math.floor(elementalCheeseUnit2.toFixed(2));
+            document.getElementById('reinforceUnit').value = Math.floor(reinforceUnit.toFixed(2));
+
+            //Grubs
+            document.getElementById('grubs').value = Math.floor(grubs.toFixed(2));
+            document.getElementById('cheese').value = Math.floor(cheese.toFixed(2));
+            
+            /*
             document.getElementById('elementalhunts').value = elementalHunts.toFixed(2);
             
             //Distribution
@@ -50,6 +66,7 @@
             //Grubs
             document.getElementById('grubs').value = grubs.toFixed(2);
             document.getElementById('cheese').value = cheese.toFixed(2);
+            */
         }
 
         function calculateHuntsRun()
@@ -81,6 +98,25 @@
 
             }
             //Totals
+            document.getElementById('embers').value = Math.floor(huntEmbers.toFixed(2));
+            document.getElementById('me').value = Math.floor(totalMe);
+            document.getElementById('rgrub').value = Math.floor(huntGrub.toFixed(2));
+            document.getElementById('bgrub').value = Math.floor(huntGrub.toFixed(2));
+            document.getElementById('ggrub').value = Math.floor(huntGrub.toFixed(2));
+            //Embers
+            document.getElementById('huntEmbers').value = Math.floor(huntEmbers);
+            document.getElementById('eecEmbers').value = Math.floor(cheeseEmbers);
+            document.getElementById('reinEmbers').value = Math.floor(reinforceEmbers);
+
+            //Units
+            document.getElementById('cheeseQuantity').value = Math.floor(cheeseQuantity);
+            document.getElementById('meQuantity').value = Math.floor(meQuantity);
+
+            //Grubs
+            document.getElementById('huntGrub').value = Math.floor(huntGrub.toFixed(2));
+            document.getElementById('meGrub').value = Math.floor(meGrub.toFixed(2));
+            /*
+            //Totals
             document.getElementById('embers').value = huntEmbers.toFixed(2);
             document.getElementById('me').value = totalMe;
             document.getElementById('rgrub').value = huntGrub.toFixed(2);
@@ -98,6 +134,7 @@
             //Grubs
             document.getElementById('huntGrub').value = huntGrub.toFixed(2);
             document.getElementById('meGrub').value = meGrub.toFixed(2);
+            */
 
         }
 
