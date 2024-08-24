@@ -169,7 +169,7 @@
     }
     /*form styles*/
     #msform {
-    	width: 400px;
+    	width: 420px;
     	margin: auto;
     	margin-top: 10px;
     	text-align: center;
@@ -383,20 +383,18 @@
 
 nav {
   width: 400px;
-  margin: auto;
   margin-bottom: 5px;
   position: relative;
   display: block;
   background-color: white;
-  padding: 15px;
-  border-radius: 20px;
+  padding: 10px;
+  border-radius: 15px;
   transform: scale(.75);
   overflow: hidden;
   box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
 }
   /*//asa*/
 nav a {
-  
   position: relative;
   text-decoration: none;
   color: #700d00; /*#53588b*/
@@ -406,7 +404,7 @@ nav a {
   text-align: center;
   display: inline-block;
   width: 95px;
-  padding: 8px;
+  padding: 7px;
   box-sizing: border-box;
   z-index: 2;
 }
@@ -419,17 +417,18 @@ nav a b {
 
 nav a i {
   position: relative;
-  left: 25%;
+  left: 30%;
   transition: 0.3s ease left;
 }
 
 nav span {
   position: absolute;
-  width: 100px;
+  width: 97px;
   background-color: #f7904c28;
   top: 10px;
   bottom: 10px;
   left: 10px;
+  right: 10px;
   border-radius: 50px;
   z-index: 1;
   transition: 0.3s ease left;
@@ -452,19 +451,19 @@ nav a:hover i {
 }
 
 .hoverClickSpanEmber {
-  left: 10px;
+  left: 13px;
 }
 
 .hoverClickSpanHunt {
-  left: 114px;
+  left: 112px;
 }
 
 nav a:nth-child(1):hover ~ span {
-  left: 10px;
+  left: 13px;
 }
 
 nav a:nth-child(2):hover ~ span {
-  left: 114px;
+  left: 112px;
 }
 
 nav a:nth-child(3):hover ~ span {
@@ -496,6 +495,11 @@ nav a:nth-child(4):hover ~ span {
     </style>
 </head>
 <body>
+
+  
+  <!-- <a href="https://www.youtube.com/channel/UC7hSS_eujjZOEQrjsda76gA/videos" target="_blank" id="ytd-url">My YouTube Channel</a> -->
+<!-- multistep form -->
+<form id="msform" name="msform">
   <nav>
     <a href="#" onclick="hideNotEmber()">
       <i class="bx bxs-hot" id="emberTabI"></i>
@@ -515,10 +519,6 @@ nav a:nth-child(4):hover ~ span {
     </a>
     <span id="spanner"></span>
   </nav>
-  
-  <!-- <a href="https://www.youtube.com/channel/UC7hSS_eujjZOEQrjsda76gA/videos" target="_blank" id="ytd-url">My YouTube Channel</a> -->
-<!-- multistep form -->
-<form id="msform" name="msform">
   <!-- fieldsets -->
   <fieldset id="emberFS">
     <h2 class="fs-title">Calculate EDD Run Based on Embers</h2>
@@ -582,7 +582,10 @@ nav a:nth-child(4):hover ~ span {
         <input type="text" id="reinforce" placeholder="Used to Reinforce" disabled/>
       </div>
     </div>
-    <INPUT TYPE="button" NAME="button" Value="CALCULATE" onClick="calculateEmberRun()">
+    <div>
+      <INPUT TYPE="button" NAME="button" Value="CALCULATE" onClick="calculateEmberRun()">
+    </div>
+
   </fieldset>
   <fieldset id="huntFS" class="initial-hide">
     <h2 class="fs-title">Calculate Resources Based Off Hunts</h2>
